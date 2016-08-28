@@ -62,6 +62,15 @@ namespace NFluent.Tests
         }
 
         [Test]
+        public void IsEqualToWorksWithEquatableObject()
+        {
+            var id = new Id(42);
+            var otherReference = new Id(42);
+
+            Check.That(id).IsEqualTo(otherReference);
+        }
+
+        [Test]
         public void CanNegateIsEqualToWithObject()
         {
             var heroe = new Person { Name = "Gandhi" };

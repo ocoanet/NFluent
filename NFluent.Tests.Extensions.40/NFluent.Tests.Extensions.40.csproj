@@ -56,6 +56,9 @@
     <Compile Include="..\NFluent.Tests.Extensions\ExtensionsForMarketingPurpose.cs">
       <Link>ExtensionsForMarketingPurpose.cs</Link>
     </Compile>
+    <Compile Include="..\NFluent.Tests.Extensions\Id.cs">
+      <Link>Id.cs</Link>
+    </Compile>
     <Compile Include="..\NFluent.Tests.Extensions\LinkableExtensionsTests.cs">
       <Link>LinkableExtensionsTests.cs</Link>
     </Compile>
@@ -106,7 +109,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties ProjectLinkReference="ac520fdb-8125-46f3-85f3-d4962c53c136" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
+      <UserProperties ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" ProjectLinkReference="ac520fdb-8125-46f3-85f3-d4962c53c136" />
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

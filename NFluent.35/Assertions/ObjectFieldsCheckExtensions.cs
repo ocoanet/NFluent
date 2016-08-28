@@ -456,6 +456,11 @@ namespace NFluent
                 return this.info.FieldType.ImplementsEquals();
             }
 
+            public bool ValueEquals(ExtendedFieldInfo other)
+            {
+                return EqualityHelper.FluentEquals(this.Value, other.Value);
+            }
+
             #endregion
         }
 
@@ -490,12 +495,7 @@ namespace NFluent
                         return false;
                     }
 
-                    if (this.expected.Value == null)
-                    {
-                        return this.actual.Value == null;
-                    }
-
-                    return this.expected.Value.Equals(this.actual.Value);
+                    return this.expected.ValueEquals(this.actual);
                 }
             }
 

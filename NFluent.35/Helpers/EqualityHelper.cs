@@ -12,6 +12,10 @@
 // //   limitations under the License.
 // // </copyright>
 // // --------------------------------------------------------------------------------------------------------------------
+
+using System;
+using System.Collections.Generic;
+
 namespace NFluent.Helpers
 {
     using NFluent.Extensibility;
@@ -44,15 +48,37 @@ namespace NFluent.Helpers
             {
                 return;
             }
-
+            
             // Should throw
             var errorMessage = BuildErrorMessage(checker, expected, false);
 
             throw new FluentCheckException(errorMessage);
         }
 
-        private static bool FluentEquals(object instance, object expected)
+        private static bool FluentEquals<T>(T instance, object expected)
         {
+            // Fast and clean path that should be taken most of the time
+            if (expected is T)
+                return EqualityComparer<T>.Default.Equals(instance, (T) expected);
+
+            return FluentEquals((object) instance, expected);
+        }
+
+        /// <summary>
+        /// Determines whether the instance is equal to the expected value, using the correct Equals method overload.
+        /// </summary>
+        /// <param name="instance">The value to be tested.</param>
+        /// <param name="expected">The expected value.</param>
+        /// <returns>true if the instance is equal to the expected value; otherwise, false.</returns>
+        public static bool FluentEquals(object instance, object expected)
+        {
+            if (expected != null && instance != null)
+            {
+                var equatableType = typeof(IEquatable<>).MakeGenericType(expected.GetType());
+                if (equatableType.IsInstanceOfType(instance))
+                    return (bool)equatableType.GetMethod("Equals").Invoke(instance, new[] { expected });
+            }
+
             return object.Equals(instance, expected);
         }
 

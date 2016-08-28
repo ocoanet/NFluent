@@ -42,12 +42,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\Version.cs">
       <Link>Version.cs</Link>
     </Compile>
+    <Compile Include="Id.cs" />
     <Compile Include="LinkableExtensionsTests.cs" />
     <Compile Include="Child.cs" />
     <Compile Include="ExtensionsForMarketingPurpose.cs" />

@@ -1,4 +1,6 @@
-﻿namespace NFluent.Tests
+﻿using System;
+
+namespace NFluent.Tests
 {
     using System.Collections.Generic;
 
@@ -101,6 +103,13 @@
         }
 
         [Test]
+        public void HasFieldsWithSameValueWorksWithEquatableType()
+        {
+            var x = new DummyWithEquatableMember { Id = new Id(2)};
+            Check.That(x).HasFieldsWithSameValues(new { Id = new Id(2) });
+        }
+
+        [Test]
         public void HasFieldsWithSameValuesDoesNotLoseOriginalTypeForOtherCheck()
         {
             // warning: this test depends on some internal details of List type
@@ -200,6 +209,11 @@
         {
             // ReSharper disable once UnusedAutoPropertyAccessor.Local
             public string Application { get; set; }
+        }
+
+        private class DummyWithEquatableMember
+        {
+            public Id Id;
         }
     }
 }
